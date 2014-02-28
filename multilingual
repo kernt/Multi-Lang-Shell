@@ -1,0 +1,34 @@
+#! /bin/bash
+
+TEXTDOMAIN=multilingue
+TEXTDOMAINDIR="$PWD/locale"
+
+toto=(
+	$"first element",
+	$"second $nom element",
+	$"$nom : There can be only one (variable expanded)"
+	$"%s : There can be only one (variable expanded)\\n"
+)
+
+echo $"Hello wonderful World !"
+read -p $"What is your name ? " nom
+tput smso ; echo $"Welcome $nom" ; tput rmso
+
+
+echo
+echo
+echo Notez la différence dans ces trois valeurs de tableau :
+for i in 0 1 2; do
+	echo ' "${toto[$i]}"' "-->""${toto[$i]}""<--"
+done
+echo
+for i in 0 1 2; do
+	echo '$"${toto[$i]}"' "-->"$"${toto[$i]}""<--"
+done
+
+echo
+echo
+echo Et Notez aussi la différence dans ces deux valeurs de tableau :
+i=3
+printf '%14s : '$"${toto[$i]}" '$"${toto[$i]}"' "$nom"
+printf '%14s : '"${toto[$i]}"   '"${toto[$i]}"' "$nom"
